@@ -18,6 +18,7 @@ describe("validateEnv", () => {
     delete process.env.SUPABASE_SERVICE_ROLE_KEY;
     delete process.env.ANTHROPIC_API_KEY;
     delete process.env.CLERK_SECRET_KEY;
+    delete process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
     const { validateEnv } = await import("@/lib/env");
     expect(() => validateEnv()).toThrow("Missing required environment variables");
@@ -28,6 +29,7 @@ describe("validateEnv", () => {
     process.env.SUPABASE_SERVICE_ROLE_KEY = "service-key";
     process.env.ANTHROPIC_API_KEY = "sk-ant-key";
     process.env.CLERK_SECRET_KEY = "clerk-key";
+    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY = "pk_test_placeholder";
 
     const { validateEnv } = await import("@/lib/env");
     expect(() => validateEnv()).not.toThrow();
@@ -71,6 +73,7 @@ describe("validateEnv", () => {
     process.env.SUPABASE_SERVICE_ROLE_KEY = "service-key";
     process.env.ANTHROPIC_API_KEY = "sk-ant-key";
     process.env.CLERK_SECRET_KEY = "clerk-key";
+    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY = "pk_test_placeholder";
 
     const { validateEnv } = await import("@/lib/env");
     expect(() => validateEnv()).toThrow("Invalid URL for NEXT_PUBLIC_SUPABASE_URL");

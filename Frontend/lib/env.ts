@@ -14,6 +14,7 @@ const SERVER_ENV_VARS: EnvVar[] = [
   { name: "SUPABASE_SERVICE_ROLE_KEY", required: true, description: "Supabase service role key (server-side only)" },
   { name: "ANTHROPIC_API_KEY", required: true, description: "Anthropic API key for AI generation" },
   { name: "CLERK_SECRET_KEY", required: true, description: "Clerk secret key for auth" },
+  { name: "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", required: true, description: "Clerk publishable key (browser) — sem isto o app devolve 500" },
   { name: "NEXT_PUBLIC_APP_URL", required: false, description: "Public site URL (OAuth redirects, checkout)" },
   { name: "STRIPE_SECRET_KEY", required: false, description: "Stripe secret key (payments)" },
   { name: "STRIPE_WEBHOOK_SECRET", required: false, description: "Stripe webhook signing secret" },
@@ -32,13 +33,23 @@ let validated = false;
  * Throws a descriptive error if any required variable is missing.
  * Safe to call multiple times (only validates once).
  */
+/** Nomes das variáveis obrigatórias (para health checks e diagnóstico). */
+export function getRequiredEnvVarNames(): string[] {
+  return SERVER_ENV_VARS.filter((v) => v.required).map((v) => v.name);
+}
+
+/** Lista nomes em falta (sem valores). Útil em /api/health na Vercel. */
+export function getMissingRequiredEnvVarNames(): string[] {
+  return SERVER_ENV_VARS.filter((v) => v.required && !process.env[v.name]?.trim()).map((v) => v.name);
+}
+
 export function validateEnv(): void {
   if (validated) return;
 
   const missing: string[] = [];
 
   for (const envVar of SERVER_ENV_VARS) {
-    if (envVar.required && !process.env[envVar.name]) {
+    if (envVar.required && !process.env[envVar.name]?.trim()) {
       missing.push(`  - ${envVar.name}: ${envVar.description}`);
     }
   }

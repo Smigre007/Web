@@ -1,20 +1,11 @@
 import { NextResponse } from "next/server";
+import { getMissingRequiredEnvVarNames } from "@/lib/env";
 import { getSupabaseAdmin } from "@/lib/supabase/server";
 
-const REQUIRED_ENV = [
-  "NEXT_PUBLIC_SUPABASE_URL",
-  "SUPABASE_SERVICE_ROLE_KEY",
-  "ANTHROPIC_API_KEY",
-  "CLERK_SECRET_KEY",
-];
-
 export async function GET() {
-  const checks = { db: false, env: false };
+  const missingEnv = getMissingRequiredEnvVarNames();
+  const checks = { db: false, env: missingEnv.length === 0 };
 
-  // Check required env vars
-  checks.env = REQUIRED_ENV.every((key) => !!process.env[key]);
-
-  // Check Supabase connectivity
   try {
     const db = getSupabaseAdmin();
     const { error } = await db.from("users").select("id").limit(1);
@@ -27,7 +18,13 @@ export async function GET() {
   const status = allOk ? "ok" : "degraded";
 
   return NextResponse.json(
-    { status, checks, timestamp: new Date().toISOString() },
+    {
+      status,
+      checks,
+      /** Presente quando env está incompleto — copie estes nomes para a Vercel (Environment Variables). */
+      missingEnv: missingEnv.length > 0 ? missingEnv : undefined,
+      timestamp: new Date().toISOString(),
+    },
     { status: allOk ? 200 : 503 }
   );
 }
