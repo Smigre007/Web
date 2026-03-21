@@ -1,0 +1,521 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Temas escuros — alinhados à hierarquia do tema CLARO (referência):
+   • Texto principal forte · muted secundário (~78% legibilidade) · subtle terciário
+   • Fundos em camadas (base / base-2) com transições suaves
+   • Acentos distintos por tema; bordas e grelhas discretas (opacidade baixa)
+   O tema claro NÃO é definido aqui — apenas dark-adjacent.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Monokai — identidade “editorial técnica”: carvão quente · lima · ciano · âmbar ─── */
+.theme-editorial[data-theme="monokai"] {
+  --color-ink: #f4f3ee;
+  --color-ink-60: rgba(244, 243, 238, 0.93);
+  --color-ink-35: rgba(228, 226, 218, 0.88);
+  --color-ink-15: rgba(244, 243, 238, 0.22);
+  --color-gold: #e8b565;
+  --color-gold-lt: #f0cfa3;
+
+  --landing-bg: #1b1c18;
+  --landing-bg-2: #232420;
+  --landing-text: #f4f3ee;
+  --landing-text-muted: rgba(244, 243, 238, 0.86);
+  --landing-text-subtle: rgba(222, 220, 210, 0.82);
+  --landing-rule: rgba(180, 229, 110, 0.06);
+  --landing-border: rgba(255, 255, 255, 0.07);
+
+  --primary: #5ec8e8;
+  --primary-glow: rgba(94, 200, 232, 0.16);
+  --accent: #b8e86b;
+  --gold: #e8b565;
+  --gold-lt: #f0cfa3;
+  --color-gold: #e8b565;
+  --color-gold-lt: #f0cfa3;
+
+  background:
+    radial-gradient(ellipse 110% 75% at 50% -18%, rgba(94, 200, 232, 0.05) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 45% at 100% 100%, rgba(184, 232, 107, 0.04) 0%, transparent 48%),
+    linear-gradient(180deg, #1b1c18 0%, #131411 100%) !important;
+  color: var(--landing-text) !important;
+}
+
+.theme-editorial[data-theme="monokai"] .section-eyebrow {
+  color: rgba(184, 232, 107, 0.82) !important;
+}
+.theme-editorial[data-theme="monokai"] .section-eyebrow::before {
+  background: rgba(94, 200, 232, 0.45);
+}
+.theme-editorial[data-theme="monokai"] .section-title {
+  color: var(--landing-text) !important;
+}
+
+.theme-editorial[data-theme="monokai"]::-webkit-scrollbar-track {
+  background: #141511;
+}
+.theme-editorial[data-theme="monokai"]::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #5ec8e8 0%, #3d9bb8 100%);
+  border-radius: 3px;
+}
+.theme-editorial[data-theme="monokai"]::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #b8e86b 0%, #5ec8e8 100%);
+}
+
+.theme-editorial[data-theme="monokai"] ::selection {
+  background: rgba(184, 232, 107, 0.22);
+  color: #f4f3ee;
+}
+
+.theme-editorial[data-theme="monokai"] .bg-cream {
+  background:
+    radial-gradient(ellipse 120% 55% at 50% -5%, rgba(94, 200, 232, 0.055) 0%, transparent 52%),
+    #1b1c18 !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream-2 {
+  background:
+    radial-gradient(ellipse 100% 50% at 50% 105%, rgba(232, 181, 101, 0.045) 0%, transparent 50%),
+    #232420 !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream-2\/80 {
+  background: rgba(35, 36, 32, 0.9) !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream\/95 {
+  background: rgba(27, 28, 24, 0.96) !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream-2\/90 {
+  background: rgba(35, 36, 32, 0.93) !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream-2\/95 {
+  background: rgba(35, 36, 32, 0.96) !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream-2\/60 {
+  background: rgba(35, 36, 32, 0.72) !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream-2\/40 {
+  background: rgba(35, 36, 32, 0.5) !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream-2\/30 {
+  background: rgba(35, 36, 32, 0.38) !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream\/30 {
+  background: rgba(27, 28, 24, 0.38) !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream\/50 {
+  background: rgba(27, 28, 24, 0.55) !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream\/80 {
+  background: rgba(27, 28, 24, 0.88) !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream\/90 {
+  background: rgba(27, 28, 24, 0.93) !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream\/10 {
+  background: rgba(27, 28, 24, 0.2) !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream\/\[0\.5\] {
+  background: rgba(27, 28, 24, 0.5) !important;
+}
+
+.theme-editorial[data-theme="monokai"] .text-ink {
+  color: var(--landing-text) !important;
+}
+.theme-editorial[data-theme="monokai"] .text-ink-60 {
+  color: var(--landing-text-muted) !important;
+}
+.theme-editorial[data-theme="monokai"] .text-ink-35 {
+  color: var(--landing-text-subtle) !important;
+}
+.theme-editorial[data-theme="monokai"] .text-ink-15 {
+  color: rgba(244, 243, 238, 0.14) !important;
+}
+
+.theme-editorial[data-theme="monokai"] .border-ink-15 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.theme-editorial[data-theme="monokai"] .bg-ink {
+  background: linear-gradient(135deg, #34352f 0%, #3e4038 100%) !important;
+  box-shadow: 0 0 0 1px rgba(184, 232, 107, 0.12);
+}
+.theme-editorial[data-theme="monokai"] .text-cream {
+  color: #f4f3ee !important;
+}
+.theme-editorial[data-theme="monokai"] .hover\:bg-gold:hover {
+  background: rgba(184, 232, 107, 0.2) !important;
+}
+
+.theme-editorial[data-theme="monokai"] .tape-muted {
+  color: rgba(210, 208, 198, 0.78) !important;
+}
+
+.theme-editorial[data-theme="monokai"] footer.border-t {
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.theme-editorial[data-theme="monokai"] .from-cream {
+  --tw-gradient-from: #1b1c18;
+  --tw-gradient-to: transparent;
+}
+.theme-editorial[data-theme="monokai"] .to-transparent {
+  --tw-gradient-to: transparent;
+}
+
+.theme-editorial[data-theme="monokai"] .grid-pattern-editorial {
+  background-image:
+    linear-gradient(rgba(184, 232, 107, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 200, 232, 0.028) 1px, transparent 1px);
+  background-size: 70px 70px;
+}
+
+.theme-editorial[data-theme="monokai"] .card-fill::before {
+  background: linear-gradient(
+    145deg,
+    rgba(184, 232, 107, 0.1) 0%,
+    rgba(94, 200, 232, 0.07) 48%,
+    transparent 100%
+  );
+}
+
+.theme-editorial[data-theme="monokai"] .glass-card:hover {
+  border-color: rgba(94, 200, 232, 0.22);
+  box-shadow:
+    0 0 48px rgba(94, 200, 232, 0.07),
+    0 0 0 1px rgba(184, 232, 107, 0.1);
+}
+
+.theme-editorial[data-theme="monokai"] .hero-cta-editorial {
+  background: linear-gradient(135deg, #3a3b35 0%, #45473e 100%) !important;
+  color: #f4f3ee !important;
+  border: 1px solid rgba(184, 232, 107, 0.22);
+}
+.theme-editorial[data-theme="monokai"] .hero-cta-editorial:hover {
+  background: #b8e86b !important;
+  color: #141511 !important;
+}
+
+.theme-editorial[data-theme="monokai"] .nav-link::after {
+  background: #5ec8e8;
+}
+
+.theme-editorial[data-theme="monokai"] .hover\:border-gold\/30:hover {
+  border-color: rgba(184, 232, 107, 0.32) !important;
+  box-shadow: 0 4px 28px rgba(94, 200, 232, 0.07);
+}
+
+.theme-editorial[data-theme="monokai"] .bg-amber-50 {
+  background: rgba(184, 232, 107, 0.09) !important;
+}
+.theme-editorial[data-theme="monokai"] .border-amber-200\/60 {
+  border-color: rgba(94, 200, 232, 0.16) !important;
+}
+.theme-editorial[data-theme="monokai"] .text-amber-700 {
+  color: rgba(232, 181, 101, 0.95) !important;
+}
+
+.theme-editorial[data-theme="monokai"] .bg-gold\/15 {
+  background: rgba(184, 232, 107, 0.09) !important;
+}
+.theme-editorial[data-theme="monokai"] .border-gold\/25 {
+  border-color: rgba(94, 200, 232, 0.16) !important;
+}
+
+.theme-editorial[data-theme="monokai"] .custom-cursor-dot {
+  background: #b8e86b;
+  mix-blend-mode: normal;
+}
+.theme-editorial[data-theme="monokai"] .custom-cursor-ring {
+  border-color: rgba(94, 200, 232, 0.32);
+}
+.theme-editorial[data-theme="monokai"] body.cursor-hov .custom-cursor-ring {
+  border-color: rgba(184, 232, 107, 0.62);
+  background: rgba(94, 200, 232, 0.07);
+  box-shadow: 0 0 16px rgba(94, 200, 232, 0.12);
+}
+
+.theme-editorial[data-theme="monokai"] .bg-cream,
+.theme-editorial[data-theme="monokai"] .bg-cream-2,
+.theme-editorial[data-theme="monokai"] .bg-cream\/95,
+.theme-editorial[data-theme="monokai"] .bg-cream-2\/80,
+.theme-editorial[data-theme="monokai"] .bg-cream-2\/90,
+.theme-editorial[data-theme="monokai"] .bg-cream-2\/95,
+.theme-editorial[data-theme="monokai"] .bg-cream-2\/60,
+.theme-editorial[data-theme="monokai"] .bg-cream-2\/40,
+.theme-editorial[data-theme="monokai"] .bg-cream-2\/30,
+.theme-editorial[data-theme="monokai"] .bg-cream\/30,
+.theme-editorial[data-theme="monokai"] .bg-cream\/50,
+.theme-editorial[data-theme="monokai"] .bg-cream\/80,
+.theme-editorial[data-theme="monokai"] .bg-cream\/90,
+.theme-editorial[data-theme="monokai"] .bg-cream\/10,
+.theme-editorial[data-theme="monokai"] .bg-cream\/\[0\.5\] {
+  color: var(--color-ink) !important;
+}
+
+.theme-editorial[data-theme="monokai"] input:not([type="checkbox"]):not([type="radio"]),
+.theme-editorial[data-theme="monokai"] textarea,
+.theme-editorial[data-theme="monokai"] select {
+  color: var(--color-ink) !important;
+}
+
+.theme-editorial[data-theme="monokai"] input::placeholder,
+.theme-editorial[data-theme="monokai"] textarea::placeholder {
+  color: var(--color-ink-35) !important;
+}
+
+.theme-editorial[data-theme="monokai"] strong {
+  color: #f4f3ee !important;
+  font-weight: 650;
+}
+
+/* ─── Dracula — identidade “nocturno editorial”: índigo · magenta · ciano (único vs Monokai) ─── */
+.theme-editorial[data-theme="dracula"] {
+  --color-ink: #f7f7f4;
+  --color-ink-60: rgba(247, 247, 244, 0.93);
+  --color-ink-35: rgba(220, 224, 246, 0.88);
+  --color-ink-15: rgba(247, 247, 244, 0.22);
+  --color-gold: #f3ea9b;
+  --color-gold-lt: #ffe08a;
+
+  --landing-bg: #1e2035;
+  --landing-bg-2: #262a45;
+  --landing-text: #f7f7f4;
+  --landing-text-muted: rgba(236, 238, 252, 0.88);
+  --landing-text-subtle: rgba(214, 218, 242, 0.84);
+  --landing-rule: rgba(189, 147, 249, 0.055);
+  --landing-border: rgba(255, 255, 255, 0.065);
+
+  --primary: #c9b3f5;
+  --primary-glow: rgba(201, 179, 245, 0.2);
+  --accent: #ff8ac4;
+  --gold: #f3ea9b;
+  --gold-lt: #ffe08a;
+
+  background:
+    radial-gradient(ellipse 100% 68% at 78% -12%, rgba(201, 179, 245, 0.1) 0%, transparent 52%),
+    radial-gradient(ellipse 85% 48% at 8% 102%, rgba(255, 138, 196, 0.065) 0%, transparent 46%),
+    linear-gradient(180deg, #1e2035 0%, #12131f 100%) !important;
+  color: var(--landing-text) !important;
+}
+
+.theme-editorial[data-theme="dracula"] .section-eyebrow {
+  color: rgba(201, 179, 245, 0.88) !important;
+}
+.theme-editorial[data-theme="dracula"] .section-eyebrow::before {
+  background: rgba(255, 138, 196, 0.42);
+}
+.theme-editorial[data-theme="dracula"] .section-title {
+  color: var(--landing-text) !important;
+}
+
+.theme-editorial[data-theme="dracula"]::-webkit-scrollbar-track {
+  background: #151624;
+}
+.theme-editorial[data-theme="dracula"]::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #c9b3f5 0%, #8b7bb8 100%);
+  border-radius: 3px;
+}
+.theme-editorial[data-theme="dracula"]::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #ff8ac4 0%, #c9b3f5 100%);
+}
+
+.theme-editorial[data-theme="dracula"] ::selection {
+  background: rgba(255, 138, 196, 0.28);
+  color: #f7f7f4;
+}
+
+.theme-editorial[data-theme="dracula"] .bg-cream {
+  background:
+    radial-gradient(ellipse 120% 55% at 50% -5%, rgba(201, 179, 245, 0.07) 0%, transparent 52%),
+    #1e2035 !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream-2 {
+  background:
+    radial-gradient(ellipse 100% 50% at 50% 105%, rgba(255, 138, 196, 0.055) 0%, transparent 50%),
+    #262a45 !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream-2\/80 {
+  background: rgba(38, 42, 69, 0.91) !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream\/95 {
+  background: rgba(30, 32, 53, 0.97) !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream-2\/90 {
+  background: rgba(38, 42, 69, 0.93) !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream-2\/95 {
+  background: rgba(38, 42, 69, 0.96) !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream-2\/60 {
+  background: rgba(38, 42, 69, 0.72) !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream-2\/40 {
+  background: rgba(38, 42, 69, 0.5) !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream-2\/30 {
+  background: rgba(38, 42, 69, 0.38) !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream\/30 {
+  background: rgba(30, 32, 53, 0.38) !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream\/50 {
+  background: rgba(30, 32, 53, 0.55) !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream\/80 {
+  background: rgba(30, 32, 53, 0.88) !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream\/90 {
+  background: rgba(30, 32, 53, 0.93) !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream\/10 {
+  background: rgba(30, 32, 53, 0.2) !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream\/\[0\.5\] {
+  background: rgba(30, 32, 53, 0.5) !important;
+}
+
+.theme-editorial[data-theme="dracula"] .text-ink {
+  color: var(--landing-text) !important;
+}
+.theme-editorial[data-theme="dracula"] .text-ink-60 {
+  color: var(--landing-text-muted) !important;
+}
+.theme-editorial[data-theme="dracula"] .text-ink-35 {
+  color: var(--landing-text-subtle) !important;
+}
+.theme-editorial[data-theme="dracula"] .text-ink-15 {
+  color: rgba(247, 247, 244, 0.13) !important;
+}
+
+.theme-editorial[data-theme="dracula"] .border-ink-15 {
+  border-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+.theme-editorial[data-theme="dracula"] .bg-ink {
+  background: linear-gradient(135deg, #6a5a8c 0%, #4a4f72 100%) !important;
+  box-shadow: 0 0 0 1px rgba(201, 179, 245, 0.22);
+}
+.theme-editorial[data-theme="dracula"] .text-cream {
+  color: #f7f7f4 !important;
+}
+.theme-editorial[data-theme="dracula"] .hover\:bg-gold:hover {
+  background: rgba(201, 179, 245, 0.2) !important;
+}
+
+.theme-editorial[data-theme="dracula"] .tape-muted {
+  color: rgba(190, 198, 232, 0.82) !important;
+}
+
+.theme-editorial[data-theme="dracula"] footer.border-t {
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.theme-editorial[data-theme="dracula"] .from-cream {
+  --tw-gradient-from: #1e2035;
+  --tw-gradient-to: transparent;
+}
+.theme-editorial[data-theme="dracula"] .to-transparent {
+  --tw-gradient-to: transparent;
+}
+
+.theme-editorial[data-theme="dracula"] .grid-pattern-editorial {
+  background-image:
+    linear-gradient(rgba(201, 179, 245, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 138, 196, 0.035) 1px, transparent 1px);
+  background-size: 70px 70px;
+}
+
+.theme-editorial[data-theme="dracula"] .card-fill::before {
+  background: linear-gradient(
+    145deg,
+    rgba(201, 179, 245, 0.12) 0%,
+    rgba(255, 138, 196, 0.07) 50%,
+    transparent 100%
+  );
+}
+
+.theme-editorial[data-theme="dracula"] .glass-card:hover {
+  border-color: rgba(255, 138, 196, 0.26);
+  box-shadow:
+    0 0 52px rgba(201, 179, 245, 0.09),
+    0 0 0 1px rgba(142, 228, 252, 0.12);
+}
+
+.theme-editorial[data-theme="dracula"] .hero-cta-editorial {
+  background: linear-gradient(135deg, #9b86c9 0%, #6a5a8c 100%) !important;
+  color: #f7f7f4 !important;
+  border: 1px solid rgba(255, 138, 196, 0.28);
+}
+.theme-editorial[data-theme="dracula"] .hero-cta-editorial:hover {
+  background: #ff8ac4 !important;
+  color: #12131f !important;
+}
+
+.theme-editorial[data-theme="dracula"] .nav-link::after {
+  background: #8ee4fc;
+}
+
+.theme-editorial[data-theme="dracula"] .hover\:border-gold\/30:hover {
+  border-color: rgba(201, 179, 245, 0.36) !important;
+  box-shadow: 0 4px 28px rgba(255, 138, 196, 0.06);
+}
+
+.theme-editorial[data-theme="dracula"] .bg-amber-50 {
+  background: rgba(201, 179, 245, 0.1) !important;
+}
+.theme-editorial[data-theme="dracula"] .border-amber-200\/60 {
+  border-color: rgba(142, 228, 252, 0.18) !important;
+}
+.theme-editorial[data-theme="dracula"] .text-amber-700 {
+  color: rgba(243, 234, 155, 0.95) !important;
+}
+
+.theme-editorial[data-theme="dracula"] .bg-gold\/15 {
+  background: rgba(201, 179, 245, 0.1) !important;
+}
+.theme-editorial[data-theme="dracula"] .border-gold\/25 {
+  border-color: rgba(255, 138, 196, 0.18) !important;
+}
+
+.theme-editorial[data-theme="dracula"] .custom-cursor-dot {
+  background: #c9b3f5;
+  mix-blend-mode: normal;
+}
+.theme-editorial[data-theme="dracula"] .custom-cursor-ring {
+  border-color: rgba(255, 138, 196, 0.38);
+}
+.theme-editorial[data-theme="dracula"] body.cursor-hov .custom-cursor-ring {
+  border-color: rgba(142, 228, 252, 0.62);
+  background: rgba(201, 179, 245, 0.1);
+  box-shadow: 0 0 18px rgba(255, 138, 196, 0.15);
+}
+
+.theme-editorial[data-theme="dracula"] .bg-cream,
+.theme-editorial[data-theme="dracula"] .bg-cream-2,
+.theme-editorial[data-theme="dracula"] .bg-cream\/95,
+.theme-editorial[data-theme="dracula"] .bg-cream-2\/80,
+.theme-editorial[data-theme="dracula"] .bg-cream-2\/90,
+.theme-editorial[data-theme="dracula"] .bg-cream-2\/95,
+.theme-editorial[data-theme="dracula"] .bg-cream-2\/60,
+.theme-editorial[data-theme="dracula"] .bg-cream-2\/40,
+.theme-editorial[data-theme="dracula"] .bg-cream-2\/30,
+.theme-editorial[data-theme="dracula"] .bg-cream\/30,
+.theme-editorial[data-theme="dracula"] .bg-cream\/50,
+.theme-editorial[data-theme="dracula"] .bg-cream\/80,
+.theme-editorial[data-theme="dracula"] .bg-cream\/90,
+.theme-editorial[data-theme="dracula"] .bg-cream\/10,
+.theme-editorial[data-theme="dracula"] .bg-cream\/\[0\.5\] {
+  color: var(--color-ink) !important;
+}
+
+.theme-editorial[data-theme="dracula"] input:not([type="checkbox"]):not([type="radio"]),
+.theme-editorial[data-theme="dracula"] textarea,
+.theme-editorial[data-theme="dracula"] select {
+  color: var(--color-ink) !important;
+}
+
+.theme-editorial[data-theme="dracula"] input::placeholder,
+.theme-editorial[data-theme="dracula"] textarea::placeholder {
+  color: var(--color-ink-35) !important;
+}
+
+.theme-editorial[data-theme="dracula"] strong {
+  color: #f7f7f4 !important;
+  font-weight: 650;
+}

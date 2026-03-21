@@ -1,0 +1,16 @@
+{
+  "name": "neurocode-ai-root",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Raiz do projeto — Frontend (Next.js), Backend (API em Frontend/app/api) e Banco de dados (Supabase).",
+  "scripts": {
+    "dev": "cd Frontend && npm run dev",
+    "build": "cd Frontend && npm run build",
+    "start": "cd Frontend && npm run start",
+    "lint": "cd Frontend && npm run lint",
+    "test": "cd Frontend && npm run test",
+    "test:watch": "cd Frontend && npm run test:watch",
+    "test:e2e": "cd Frontend && npm run test:e2e",
+    "lighthouse:ci": "cd Frontend && npm run lighthouse:ci"
+  }
+}

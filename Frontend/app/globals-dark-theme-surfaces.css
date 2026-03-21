@@ -1,0 +1,273 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Temas escuros (dark · monokai · dracula): espelhar a lógica do tema CLARO
+   — superfície clara + texto escuro  →  superfície do tema + texto claro (ink).
+   Cobre utilitários Tailwind que ainda usam --color-cream (#f5f2ed) com opacidade
+   ou variantes hover/focus que não herdavam os overrides de .bg-cream.
+   O tema light não é alterado (apenas [data-theme] ≠ light).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Elevações discretas: no claro, cream a 3–8% sobre cream; no escuro, branco
+     sobre base escura (equivalente visual a “destaque” sem mancha clara). ─── */
+
+/* ─── Dark ─── */
+.theme-editorial[data-theme="dark"] .bg-cream\/\[0\.03\] {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+.theme-editorial[data-theme="dark"] .bg-cream\/\[0\.04\] {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+.theme-editorial[data-theme="dark"] .bg-cream\/\[0\.05\] {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+.theme-editorial[data-theme="dark"] .bg-cream\/\[0\.06\] {
+  background: rgba(255, 255, 255, 0.07) !important;
+}
+.theme-editorial[data-theme="dark"] .bg-cream\/\[0\.08\] {
+  background: rgba(255, 255, 255, 0.09) !important;
+}
+
+.theme-editorial[data-theme="dark"] .hover\:bg-cream\/\[0\.04\]:hover,
+.theme-editorial[data-theme="dark"] .hover\:bg-cream\/\[0\.05\]:hover,
+.theme-editorial[data-theme="dark"] .hover\:bg-cream\/\[0\.06\]:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.theme-editorial[data-theme="dark"] .border-cream\/\[0\.06\] {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.theme-editorial[data-theme="dark"] .border-cream\/\[0\.07\] {
+  border-color: rgba(255, 255, 255, 0.09) !important;
+}
+.theme-editorial[data-theme="dark"] .border-cream\/\[0\.1\] {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+.theme-editorial[data-theme="dark"] .hover\:border-cream\/\[0\.1\]:hover {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+.theme-editorial[data-theme="dark"] .border-cream\/20 {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+.theme-editorial[data-theme="dark"] .border-cream\/30 {
+  border-color: rgba(255, 255, 255, 0.28) !important;
+}
+
+.theme-editorial[data-theme="dark"] .hover\:bg-cream:hover,
+.theme-editorial[data-theme="dark"] .focus\:bg-cream:focus,
+.theme-editorial[data-theme="dark"] .group:hover .group-hover\:bg-cream {
+  background:
+    radial-gradient(ellipse 120% 55% at 50% -5%, rgba(150, 20, 20, 0.1) 0%, transparent 52%),
+    #060504 !important;
+}
+
+.theme-editorial[data-theme="dark"] .hover\:bg-cream-2:hover,
+.theme-editorial[data-theme="dark"] .focus\:bg-cream-2:focus {
+  background:
+    radial-gradient(ellipse 100% 50% at 50% 105%, rgba(130, 18, 18, 0.07) 0%, transparent 50%),
+    #0d0808 !important;
+}
+
+.theme-editorial[data-theme="dark"] .hover\:bg-cream-2\/30:hover {
+  background: rgba(13, 8, 8, 0.38) !important;
+}
+
+/* ─── Monokai ─── */
+.theme-editorial[data-theme="monokai"] .bg-cream\/\[0\.03\] {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream\/\[0\.04\] {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream\/\[0\.05\] {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream\/\[0\.06\] {
+  background: rgba(255, 255, 255, 0.07) !important;
+}
+.theme-editorial[data-theme="monokai"] .bg-cream\/\[0\.08\] {
+  background: rgba(255, 255, 255, 0.09) !important;
+}
+
+.theme-editorial[data-theme="monokai"] .hover\:bg-cream\/\[0\.04\]:hover,
+.theme-editorial[data-theme="monokai"] .hover\:bg-cream\/\[0\.05\]:hover,
+.theme-editorial[data-theme="monokai"] .hover\:bg-cream\/\[0\.06\]:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.theme-editorial[data-theme="monokai"] .border-cream\/\[0\.06\] {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.theme-editorial[data-theme="monokai"] .border-cream\/\[0\.07\] {
+  border-color: rgba(255, 255, 255, 0.09) !important;
+}
+.theme-editorial[data-theme="monokai"] .border-cream\/\[0\.1\] {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+.theme-editorial[data-theme="monokai"] .hover\:border-cream\/\[0\.1\]:hover {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+.theme-editorial[data-theme="monokai"] .border-cream\/20 {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+.theme-editorial[data-theme="monokai"] .border-cream\/30 {
+  border-color: rgba(255, 255, 255, 0.28) !important;
+}
+
+.theme-editorial[data-theme="monokai"] .hover\:bg-cream:hover,
+.theme-editorial[data-theme="monokai"] .focus\:bg-cream:focus,
+.theme-editorial[data-theme="monokai"] .group:hover .group-hover\:bg-cream {
+  background:
+    radial-gradient(ellipse 120% 55% at 50% -5%, rgba(94, 200, 232, 0.055) 0%, transparent 52%),
+    #1b1c18 !important;
+}
+
+.theme-editorial[data-theme="monokai"] .hover\:bg-cream-2:hover,
+.theme-editorial[data-theme="monokai"] .focus\:bg-cream-2:focus {
+  background:
+    radial-gradient(ellipse 100% 50% at 50% 105%, rgba(232, 181, 101, 0.045) 0%, transparent 50%),
+    #232420 !important;
+}
+
+.theme-editorial[data-theme="monokai"] .hover\:bg-cream-2\/30:hover {
+  background: rgba(35, 36, 32, 0.38) !important;
+}
+
+/* ─── Dracula ─── */
+.theme-editorial[data-theme="dracula"] .bg-cream\/\[0\.03\] {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream\/\[0\.04\] {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream\/\[0\.05\] {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream\/\[0\.06\] {
+  background: rgba(255, 255, 255, 0.07) !important;
+}
+.theme-editorial[data-theme="dracula"] .bg-cream\/\[0\.08\] {
+  background: rgba(255, 255, 255, 0.09) !important;
+}
+
+.theme-editorial[data-theme="dracula"] .hover\:bg-cream\/\[0\.04\]:hover,
+.theme-editorial[data-theme="dracula"] .hover\:bg-cream\/\[0\.05\]:hover,
+.theme-editorial[data-theme="dracula"] .hover\:bg-cream\/\[0\.06\]:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.theme-editorial[data-theme="dracula"] .border-cream\/\[0\.06\] {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.theme-editorial[data-theme="dracula"] .border-cream\/\[0\.07\] {
+  border-color: rgba(255, 255, 255, 0.09) !important;
+}
+.theme-editorial[data-theme="dracula"] .border-cream\/\[0\.1\] {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+.theme-editorial[data-theme="dracula"] .hover\:border-cream\/\[0\.1\]:hover {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+.theme-editorial[data-theme="dracula"] .border-cream\/20 {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+.theme-editorial[data-theme="dracula"] .border-cream\/30 {
+  border-color: rgba(255, 255, 255, 0.28) !important;
+}
+
+.theme-editorial[data-theme="dracula"] .hover\:bg-cream:hover,
+.theme-editorial[data-theme="dracula"] .focus\:bg-cream:focus,
+.theme-editorial[data-theme="dracula"] .group:hover .group-hover\:bg-cream {
+  background:
+    radial-gradient(ellipse 120% 55% at 50% -5%, rgba(201, 179, 245, 0.07) 0%, transparent 52%),
+    #1e2035 !important;
+}
+
+.theme-editorial[data-theme="dracula"] .hover\:bg-cream-2:hover,
+.theme-editorial[data-theme="dracula"] .focus\:bg-cream-2:focus {
+  background:
+    radial-gradient(ellipse 100% 50% at 50% 105%, rgba(255, 138, 196, 0.055) 0%, transparent 50%),
+    #262a45 !important;
+}
+
+.theme-editorial[data-theme="dracula"] .hover\:bg-cream-2\/30:hover {
+  background: rgba(38, 42, 69, 0.38) !important;
+}
+
+/* Texto legível em superfícies cream (incl. hover/focus) — mesma regra do tema claro invertida */
+.theme-editorial[data-theme="dark"] .hover\:bg-cream:hover,
+.theme-editorial[data-theme="dark"] .focus\:bg-cream:focus,
+.theme-editorial[data-theme="dark"] .group:hover .group-hover\:bg-cream,
+.theme-editorial[data-theme="dark"] .hover\:bg-cream-2:hover,
+.theme-editorial[data-theme="dark"] .focus\:bg-cream-2:focus,
+.theme-editorial[data-theme="dark"] .hover\:bg-cream-2\/30:hover,
+.theme-editorial[data-theme="dark"] .bg-cream\/\[0\.03\],
+.theme-editorial[data-theme="dark"] .bg-cream\/\[0\.04\],
+.theme-editorial[data-theme="dark"] .bg-cream\/\[0\.05\],
+.theme-editorial[data-theme="dark"] .bg-cream\/\[0\.06\],
+.theme-editorial[data-theme="dark"] .bg-cream\/\[0\.08\],
+.theme-editorial[data-theme="dark"] .hover\:bg-cream\/\[0\.04\]:hover,
+.theme-editorial[data-theme="dark"] .hover\:bg-cream\/\[0\.05\]:hover,
+.theme-editorial[data-theme="dark"] .hover\:bg-cream\/\[0\.06\]:hover {
+  color: var(--color-ink) !important;
+}
+
+.theme-editorial[data-theme="monokai"] .hover\:bg-cream:hover,
+.theme-editorial[data-theme="monokai"] .focus\:bg-cream:focus,
+.theme-editorial[data-theme="monokai"] .group:hover .group-hover\:bg-cream,
+.theme-editorial[data-theme="monokai"] .hover\:bg-cream-2:hover,
+.theme-editorial[data-theme="monokai"] .focus\:bg-cream-2:focus,
+.theme-editorial[data-theme="monokai"] .hover\:bg-cream-2\/30:hover,
+.theme-editorial[data-theme="monokai"] .bg-cream\/\[0\.03\],
+.theme-editorial[data-theme="monokai"] .bg-cream\/\[0\.04\],
+.theme-editorial[data-theme="monokai"] .bg-cream\/\[0\.05\],
+.theme-editorial[data-theme="monokai"] .bg-cream\/\[0\.06\],
+.theme-editorial[data-theme="monokai"] .bg-cream\/\[0\.08\],
+.theme-editorial[data-theme="monokai"] .hover\:bg-cream\/\[0\.04\]:hover,
+.theme-editorial[data-theme="monokai"] .hover\:bg-cream\/\[0\.05\]:hover,
+.theme-editorial[data-theme="monokai"] .hover\:bg-cream\/\[0\.06\]:hover {
+  color: var(--color-ink) !important;
+}
+
+.theme-editorial[data-theme="dracula"] .hover\:bg-cream:hover,
+.theme-editorial[data-theme="dracula"] .focus\:bg-cream:focus,
+.theme-editorial[data-theme="dracula"] .group:hover .group-hover\:bg-cream,
+.theme-editorial[data-theme="dracula"] .hover\:bg-cream-2:hover,
+.theme-editorial[data-theme="dracula"] .focus\:bg-cream-2:focus,
+.theme-editorial[data-theme="dracula"] .hover\:bg-cream-2\/30:hover,
+.theme-editorial[data-theme="dracula"] .bg-cream\/\[0\.03\],
+.theme-editorial[data-theme="dracula"] .bg-cream\/\[0\.04\],
+.theme-editorial[data-theme="dracula"] .bg-cream\/\[0\.05\],
+.theme-editorial[data-theme="dracula"] .bg-cream\/\[0\.06\],
+.theme-editorial[data-theme="dracula"] .bg-cream\/\[0\.08\],
+.theme-editorial[data-theme="dracula"] .hover\:bg-cream\/\[0\.04\]:hover,
+.theme-editorial[data-theme="dracula"] .hover\:bg-cream\/\[0\.05\]:hover,
+.theme-editorial[data-theme="dracula"] .hover\:bg-cream\/\[0\.06\]:hover {
+  color: var(--color-ink) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Ouro (bg-gold): no tema claro, text-ink = #141210 sobre dourado — legível.
+   Nos temas escuros, .text-ink passa a ser CLARO (ink invertido) → texto claro
+   sobre dourado = o mesmo erro do cream. Forçar texto escuro em ouro sólido /
+   hover, espelhando o claro.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.theme-editorial[data-theme="dark"] .bg-gold,
+.theme-editorial[data-theme="monokai"] .bg-gold,
+.theme-editorial[data-theme="dracula"] .bg-gold {
+  color: #141210 !important;
+}
+
+.theme-editorial[data-theme="dark"] .hover\:bg-gold-lt:hover,
+.theme-editorial[data-theme="monokai"] .hover\:bg-gold-lt:hover,
+.theme-editorial[data-theme="dracula"] .hover\:bg-gold-lt:hover {
+  color: #141210 !important;
+}
+
+.theme-editorial[data-theme="dark"] .hover\:bg-gold:hover,
+.theme-editorial[data-theme="monokai"] .hover\:bg-gold:hover,
+.theme-editorial[data-theme="dracula"] .hover\:bg-gold:hover {
+  color: #141210 !important;
+}
