@@ -6,8 +6,9 @@ import { Hero } from "@/components/landing/hero";
 import { AgencyPack } from "@/components/landing/agency-pack";
 import { CaseROI } from "@/components/landing/case-roi";
 import { SalesObjections } from "@/components/landing/sales-objections";
+import { getPublicAppUrl } from "@/lib/env";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://neurocode.ai";
+const APP_URL = getPublicAppUrl();
 
 export const metadata: Metadata = {
   title: "NeuroCode AI — Plataforma para agências criarem MVPs com IA",

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
+import { getPublicAppUrl } from "@/lib/env";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://neurocode.ai";
+const APP_URL = getPublicAppUrl();
 
 const STATIC_PAGES = [
   { path: "/", priority: "1.0", changefreq: "weekly" },

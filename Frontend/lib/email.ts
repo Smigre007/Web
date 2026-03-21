@@ -4,6 +4,7 @@
  */
 import { Resend } from "resend";
 import { logger } from "@/lib/logger";
+import { getPublicAppUrl } from "@/lib/env";
 
 function getResend(): Resend | null {
   if (!process.env.RESEND_API_KEY) return null;
@@ -12,7 +13,7 @@ function getResend(): Resend | null {
 
 const FROM = process.env.RESEND_FROM_EMAIL ?? "NeuroCode AI <noreply@neurocode.ai>";
 const ADMIN = process.env.RESEND_ADMIN_EMAIL ?? "";
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://neurocode.ai";
+const APP_URL = getPublicAppUrl();
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 

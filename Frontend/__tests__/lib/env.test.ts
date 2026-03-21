@@ -49,6 +49,23 @@ describe("validateEnv", () => {
     expect(hasStripe()).toBe(true);
   });
 
+  it("getPublicAppUrl falls back when NEXT_PUBLIC_APP_URL is unset or empty", async () => {
+    delete process.env.NEXT_PUBLIC_APP_URL;
+    vi.resetModules();
+    const { getPublicAppUrl } = await import("@/lib/env");
+    expect(getPublicAppUrl()).toBe("https://neurocode.ai");
+
+    process.env.NEXT_PUBLIC_APP_URL = "";
+    vi.resetModules();
+    const { getPublicAppUrl: getUrl2 } = await import("@/lib/env");
+    expect(getUrl2()).toBe("https://neurocode.ai");
+
+    process.env.NEXT_PUBLIC_APP_URL = "https://myapp.vercel.app";
+    vi.resetModules();
+    const { getPublicAppUrl: getUrl3 } = await import("@/lib/env");
+    expect(getUrl3()).toBe("https://myapp.vercel.app");
+  });
+
   it("throws when NEXT_PUBLIC_SUPABASE_URL is not a valid URL", async () => {
     process.env.NEXT_PUBLIC_SUPABASE_URL = "not-a-url";
     process.env.SUPABASE_SERVICE_ROLE_KEY = "service-key";

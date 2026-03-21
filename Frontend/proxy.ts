@@ -37,7 +37,7 @@ async function getClerkHandler(): Promise<NextMiddleware> {
  * Smoke E2E/Lighthouse: `npm run start:e2e` define `PLAYWRIGHT_E2E=1` — não carrega o SDK Clerk no edge.
  * Não definir `PLAYWRIGHT_E2E` em produção.
  */
-export default async function middleware(req: NextRequest, evt: NextFetchEvent) {
+export default async function proxy(req: NextRequest, evt: NextFetchEvent) {
   if (process.env.PLAYWRIGHT_E2E === "1") {
     return NextResponse.next();
   }

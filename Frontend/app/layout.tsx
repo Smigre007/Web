@@ -8,6 +8,7 @@ import { ScrollProgress } from "@/components/scroll-progress";
 import { CookieConsent } from "@/components/ui/cookie-consent";
 import { GlobalProviders } from "@/components/global-providers";
 import { LANG_COOKIE_NAME, cookieValueToHtmlLang } from "@/lib/locale-html";
+import { getPublicAppUrl } from "@/lib/env";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -29,7 +30,7 @@ const dmMono = DM_Mono({
   display: "swap",
 });
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://neurocode.ai";
+const APP_URL = getPublicAppUrl();
 
 export const metadata: Metadata = {
   title: {

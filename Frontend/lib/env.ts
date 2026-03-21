@@ -65,6 +65,15 @@ function assertValidUrlIfSet(name: string, value: string | undefined): void {
   }
 }
 
+/**
+ * URL pública do site (metadata, sitemap, e-mails).
+ * Usa `||` em vez de `??` para que string vazia na Vercel não quebre `new URL()` no layout.
+ */
+export function getPublicAppUrl(): string {
+  const v = process.env.NEXT_PUBLIC_APP_URL?.trim();
+  return v || "https://neurocode.ai";
+}
+
 /** Returns true if Stripe is configured */
 export function hasStripe(): boolean {
   return !!(process.env.STRIPE_SECRET_KEY && process.env.STRIPE_WEBHOOK_SECRET);
