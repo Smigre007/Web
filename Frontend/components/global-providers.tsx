@@ -1,7 +1,7 @@
 "use client";
 
 import { ThemeProvider, useTheme } from "@/context/theme-context";
-import { LanguageProvider } from "@/context/language-context";
+import { LanguageProvider, type Language } from "@/context/language-context";
 import { type ReactNode } from "react";
 
 function ThemedBody({ children }: { children: ReactNode }) {
@@ -19,10 +19,17 @@ function ThemedBody({ children }: { children: ReactNode }) {
   );
 }
 
-export function GlobalProviders({ children }: { children: ReactNode }) {
+export function GlobalProviders({
+  children,
+  initialLanguage,
+}: {
+  children: ReactNode;
+  /** Cookie neurocode-lang (servidor) — alinha Navbar, changelog e t() com o idioma antes do localStorage. */
+  initialLanguage?: Language;
+}) {
   return (
     <ThemeProvider>
-      <LanguageProvider>
+      <LanguageProvider initialLanguage={initialLanguage}>
         <ThemedBody>{children}</ThemedBody>
       </LanguageProvider>
     </ThemeProvider>

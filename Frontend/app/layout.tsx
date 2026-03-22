@@ -7,7 +7,7 @@ import { Toaster } from "sonner";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { CookieConsent } from "@/components/ui/cookie-consent";
 import { GlobalProviders } from "@/components/global-providers";
-import { LANG_COOKIE_NAME, cookieValueToHtmlLang } from "@/lib/locale-html";
+import { LANG_COOKIE_NAME, cookieValueToHtmlLang, isLanguageCode } from "@/lib/locale-html";
 import { getPublicAppUrl } from "@/lib/env";
 
 const cormorant = Cormorant_Garamond({
@@ -69,12 +69,13 @@ export default async function RootLayout({
 }>) {
   const langCookie = (await cookies()).get(LANG_COOKIE_NAME)?.value;
   const htmlLang = cookieValueToHtmlLang(langCookie);
+  const initialLanguage = isLanguageCode(langCookie) ? langCookie : undefined;
 
   return (
     <ClerkProvider signUpFallbackRedirectUrl="/gerar">
       <html lang={htmlLang} suppressHydrationWarning className={`${cormorant.variable} ${syne.variable} ${dmMono.variable}`}>
         <body className="antialiased font-sans">
-          <GlobalProviders>
+          <GlobalProviders initialLanguage={initialLanguage}>
             <ScrollProgress />
             {children}
             <CookieConsent />

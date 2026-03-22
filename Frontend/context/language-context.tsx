@@ -40,19 +40,26 @@ interface LanguageContextValue {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageSate] = useState<Language>("pt");
+export function LanguageProvider({
+  children,
+  /** Definido no layout a partir do cookie `neurocode-lang` — evita PT no SSR/hidratação quando o cookie já é en/es/fr. */
+  initialLanguage = "pt",
+}: {
+  children: ReactNode;
+  initialLanguage?: Language;
+}) {
+  const [language, setLanguageSate] = useState<Language>(initialLanguage);
   const [messages, setMessages] = useState<Messages>({});
 
-  // Load initial language from localStorage and fetch messages
+  // Preferência do dispositivo (localStorage) > cookie do layout (idioma já escolhido) > pt
   useEffect(() => {
     const stored = (typeof window !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null) as Language | null;
-    const initial: Language = stored && ["pt", "en", "es", "fr"].includes(stored) ? stored : "pt";
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setLanguageSate(initial);
-    persistLangCookie(initial);
-    loadMessages(initial).then(setMessages);
-  }, []);
+    const resolved: Language =
+      stored && ["pt", "en", "es", "fr"].includes(stored) ? stored : initialLanguage;
+    setLanguageSate(resolved);
+    persistLangCookie(resolved);
+    loadMessages(resolved).then(setMessages);
+  }, [initialLanguage]);
 
   const setLanguage = useCallback((lang: Language) => {
     setLanguageSate(lang);
