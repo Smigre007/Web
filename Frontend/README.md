@@ -30,6 +30,7 @@ A aplicação sobe em http://localhost:3000.
 
 - O ficheiro `next-env.d.ts` referencia **`.next/types/routes.d.ts`**, gerado pelo Next. Se ainda não correu **`npm run dev`** ou **`npm run build`**, o Cursor/VS Code pode mostrar **dezenas de erros** (ficheiro em falta). Corra um dos comandos acima e recarregue a janela do editor.
 - Verificação manual: **`npm run typecheck`** (`tsc --noEmit`), igual ao usado no CI.
+- Pipeline único: **`npm run verify`** (typecheck + lint + test). Na raiz do repo: `npm run verify`.
 - Abra o repositório na raiz `Web` e use o **TypeScript do workspace** (definido em `.vscode/settings.json`): comando *TypeScript: Select TypeScript Version* → *Use Workspace Version*.
 
 ## Dashboard (QA)

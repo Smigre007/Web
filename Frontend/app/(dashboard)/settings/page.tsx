@@ -435,10 +435,12 @@ export default function SettingsPage() {
           code?: string;
         };
         if (!res.ok || payload.ok === false) {
-          console.info("[NeuroCode preferências] servidor não gravou — copie isto:", {
-            httpStatus: res.status,
-            ...payload,
-          });
+          if (process.env.NODE_ENV === "development") {
+            console.info("[NeuroCode preferências] servidor não gravou — copie isto:", {
+              httpStatus: res.status,
+              ...payload,
+            });
+          }
           if (!opts.silent) {
             toast.warning("Guardado neste dispositivo", {
               description:
@@ -468,10 +470,12 @@ export default function SettingsPage() {
         if (isUiTheme(ui)) {
           setTheme(ui);
         }
-        console.info("[NeuroCode preferências] OK — servidor gravou:", {
-          httpStatus: res.status,
-          ...payload,
-        });
+        if (process.env.NODE_ENV === "development") {
+          console.info("[NeuroCode preferências] OK — servidor gravou:", {
+            httpStatus: res.status,
+            ...payload,
+          });
+        }
         if (!opts.silent) {
           toast.success("Preferências salvas!", {
             description: "Suas configurações foram atualizadas na conta.",
@@ -488,7 +492,9 @@ export default function SettingsPage() {
         }
         return true;
       } catch (e) {
-        console.info("[NeuroCode preferências] erro de rede:", e);
+        if (process.env.NODE_ENV === "development") {
+          console.info("[NeuroCode preferências] erro de rede:", e);
+        }
         if (!opts.silent) {
           toast.error("Erro de rede ao salvar.", { duration: 12000, closeButton: true });
         } else {
