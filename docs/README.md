@@ -23,3 +23,5 @@ Documentação já existente no repositório:
 - [Banco de dados/README.md](../Banco%20de%20dados/README.md) — migração `preferences`
 
 Página pública de operação comercial (agências): rota **`/docs/operacao`** (`Frontend/app/docs/operacao/page.tsx`).
+
+**Internacionalização:** existem ficheiros em `Frontend/locales/`; parte da UI pode ainda estar em português hardcoded — alinhar gradualmente com chaves partilhadas.

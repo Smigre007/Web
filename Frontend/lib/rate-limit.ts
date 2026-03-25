@@ -1,28 +1,27 @@
 /**
- * Persistent rate limiter backed by Supabase.
- * Falls back to in-memory if DB is unavailable.
+ * Persistent rate limiter backed by Supabase RPC `upsert_rate_limit`.
  *
- * Requires the `rate_limits` table in Supabase (see schema.sql migration below).
+ * In production, if the RPC fails, we do **not** fall back to in-memory storage
+ * (unreliable across serverless instances). Callers should return 503.
  *
- * SQL migration:
- *   create table if not exists public.rate_limits (
- *     id         text primary key,       -- e.g. "contact:1.2.3.4"
- *     count      integer not null default 1,
- *     reset_at   timestamptz not null,
- *     created_at timestamptz not null default now()
- *   );
- *   create index if not exists rate_limits_reset_idx on public.rate_limits (reset_at);
- *   alter table public.rate_limits enable row level security;
+ * In development and test, in-memory fallback keeps local DX when DB is absent.
+ *
+ * Requires `rate_limits` table and `upsert_rate_limit` — see
+ * `Banco de dados/supabase/schema.sql`.
  */
 
-interface RateLimitResult {
-  limited: boolean;
-  remaining: number;
-  resetAt: Date;
-}
+import { isProduction } from "@/lib/env";
 
-// In-memory fallback (single worker only)
+export type RateLimitOutcome =
+  | { ok: true; limited: boolean; remaining: number; resetAt: Date }
+  | { ok: false; reason: "backend_unavailable" };
+
+// In-memory fallback (single process only — dev/test)
 const memoryStore = new Map<string, { count: number; resetAt: number }>();
+
+function allowInMemoryFallback(): boolean {
+  return !isProduction();
+}
 
 /**
  * Check and increment a rate limit counter.
@@ -34,15 +33,13 @@ export async function checkRateLimit(
   key: string,
   limit: number,
   windowMs: number
-): Promise<RateLimitResult> {
-  // Try Supabase first
+): Promise<RateLimitOutcome> {
   try {
     const { getSupabaseAdmin } = await import("@/lib/supabase/server");
     const db = getSupabaseAdmin();
     const now = new Date();
     const resetAt = new Date(now.getTime() + windowMs);
 
-    // Upsert: increment count if key exists and not expired, otherwise reset
     const { data, error } = await db.rpc("upsert_rate_limit", {
       p_key: key,
       p_window_ms: windowMs,
@@ -53,27 +50,37 @@ export async function checkRateLimit(
     if (!error && data !== null) {
       const count = data as number;
       return {
+        ok: true,
         limited: count > limit,
         remaining: Math.max(0, limit - count),
         resetAt,
       };
     }
   } catch {
-    // Fall through to in-memory fallback
+    // fall through
   }
 
-  // In-memory fallback
+  if (!allowInMemoryFallback()) {
+    return { ok: false, reason: "backend_unavailable" };
+  }
+
   const now = Date.now();
   const entry = memoryStore.get(key);
 
   if (!entry || now > entry.resetAt) {
     memoryStore.set(key, { count: 1, resetAt: now + windowMs });
-    return { limited: false, remaining: limit - 1, resetAt: new Date(now + windowMs) };
+    return {
+      ok: true,
+      limited: false,
+      remaining: limit - 1,
+      resetAt: new Date(now + windowMs),
+    };
   }
 
   entry.count++;
 
   return {
+    ok: true,
     limited: entry.count > limit,
     remaining: Math.max(0, limit - entry.count),
     resetAt: new Date(entry.resetAt),

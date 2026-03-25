@@ -63,6 +63,12 @@ jobs:
       - name: Run tests
         run: npm run test -- --reporter=verbose
 
+      # Com credenciais reais de staging: remova SKIP_DB_SCHEMA_CHECK e defina NEXT_PUBLIC_SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY em secrets.
+      - name: DB schema check (skipped without real DB)
+        run: npm run db:check
+        env:
+          SKIP_DB_SCHEMA_CHECK: "1"
+
   build:
     name: Build · E2E · Lighthouse
     runs-on: ubuntu-latest

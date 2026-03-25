@@ -12,6 +12,7 @@
     "test:watch": "cd Frontend && npm run test:watch",
     "test:e2e": "cd Frontend && npm run test:e2e",
     "lighthouse:ci": "cd Frontend && npm run lighthouse:ci",
+    "db:check": "cd Frontend && npm run db:check",
     "vercel": "cd Frontend && vercel",
     "vercel:prod": "cd Frontend && vercel --prod"
   }

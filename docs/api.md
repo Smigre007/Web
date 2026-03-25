@@ -6,7 +6,8 @@ Convenção: cada pasta com **`route.ts`** exporta métodos HTTP. Resumo por ár
 
 | Caminho | Função |
 |---------|--------|
-| `GET /api/health` | Estado do ambiente e ligação Supabase |
+| `GET /api/health` | Liveness (processo a responder; sempre 200 se a rota existir) |
+| `GET /api/ready` | Readiness (variáveis obrigatórias + ligação à tabela `users` no Supabase; **503** se degradado) |
 | `GET /api/stats` | Estatísticas (autenticado / contexto app) |
 | `GET /api/public/stats` | Estatísticas públicas |
 

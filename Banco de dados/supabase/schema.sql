@@ -174,6 +174,9 @@ begin
 end;
 $$;
 
+-- Service role (used by API routes) must be able to execute the RPC
+grant execute on function public.upsert_rate_limit(text, bigint, timestamptz, timestamptz) to service_role;
+
 -- ============================================================
 -- MIGRATION — run these if updating an existing database
 -- (safe to run multiple times: uses IF NOT EXISTS / IF EXISTS)

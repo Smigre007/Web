@@ -24,8 +24,15 @@ export async function POST(req: NextRequest) {
       req.headers.get("x-real-ip") ??
       "unknown";
 
-    const { limited } = await checkRateLimit(`contact:${ip}`, RATE_LIMIT, WINDOW_MS);
-    if (limited) {
+    const rl = await checkRateLimit(`contact:${ip}`, RATE_LIMIT, WINDOW_MS);
+    if (!rl.ok) {
+      logger.error("contact: rate limit backend unavailable", { ip });
+      return NextResponse.json(
+        { error: "Serviço temporariamente indisponível. Tente novamente em instantes." },
+        { status: 503 }
+      );
+    }
+    if (rl.limited) {
       return NextResponse.json(
         { error: "Muitas tentativas. Tente novamente em 15 minutos." },
         {

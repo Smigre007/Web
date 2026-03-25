@@ -20,7 +20,7 @@ Configure na Vercel todas as variáveis de [variaveis-ambiente.md](variaveis-amb
 
 ## Monitorização
 
-- `GET /api/health` para probes de disponibilidade.
+- `GET /api/health` para liveness; `GET /api/ready` para readiness (DB + env).
 - Sentry opcional via `@sentry/nextjs` e `next.config.ts` (`withSentryConfig`).
 
 ## Documentação comercial interna

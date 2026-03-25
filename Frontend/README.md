@@ -38,7 +38,7 @@ A aplicação sobe em http://localhost:3000.
 ## Variáveis de ambiente (desenvolvimento)
 
 - `ALLOW_UNVERIFIED_STRIPE_WEBHOOK=true` — apenas com `NODE_ENV` diferente de `production`: aceita POST no webhook Stripe sem verificar assinatura (testes locais). Em produção o webhook sem segredos responde **503**.
-- `ALLOW_GENERATE_WITHOUT_DB_CHECK=true` — em produção, permite continuar a geração se a leitura de limites no Supabase falhar (não recomendado). Sem isto, em produção devolve **503** nesse caso.
+- `DANGEROUS_ALLOW_GENERATE_WITHOUT_DB_CHECK=true` — **só em emergência**: em produção, permite continuar a geração se a leitura de limites no Supabase falhar (não recomendado). Sem isto, em produção devolve **503** nesse caso. Em `development` o bypass é permitido sem esta variável.
 
 ## Operação comercial (agências)
 

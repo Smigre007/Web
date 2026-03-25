@@ -60,6 +60,4 @@ Grupo `(ai)/`:
 
 ## Proteção de rotas
 
-O **Clerk** protege rotas que não estão na lista de rotas públicas do middleware. A lista atual está em **`Frontend/proxy.ts`** (rotas como `/`, `/sign-in`, `/api/webhooks`, `/pricing`, `/contact`, etc.). Rotas de marketing adicionais podem precisar de ser incluídas em `publicRoutes` para acesso sem login.
-
-**Nota:** o ficheiro implementa o padrão `middleware` do Next.js. O Next espera normalmente o nome **`middleware.ts`** na raiz do `Frontend`. Se a proteção edge não estiver ativa, confirme se existe `middleware.ts` ou se `proxy.ts` deve ser renomeado/reexportado.
+O **Clerk** protege rotas que não estão na lista de rotas públicas do proxy (edge). A lista atual está em **`Frontend/proxy.ts`** (rotas como `/`, `/sign-in`, `/api/webhooks`, `/pricing`, `/contact`, `/api/health`, `/api/ready`, etc.). Rotas de marketing adicionais podem precisar de ser incluídas em `isPublicRoute` para acesso sem login.

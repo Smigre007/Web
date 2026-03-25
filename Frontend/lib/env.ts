@@ -38,7 +38,7 @@ export function getRequiredEnvVarNames(): string[] {
   return SERVER_ENV_VARS.filter((v) => v.required).map((v) => v.name);
 }
 
-/** Lista nomes em falta (sem valores). Útil em /api/health na Vercel. */
+/** Lista nomes em falta (sem valores). Útil em /api/ready na Vercel. */
 export function getMissingRequiredEnvVarNames(): string[] {
   return SERVER_ENV_VARS.filter((v) => v.required && !process.env[v.name]?.trim()).map((v) => v.name);
 }

@@ -28,6 +28,8 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    const startedAt = Date.now();
+
     // Check usage limits and store user data for later increment
     let userRow: { generations_used: number; generations_limit: number; plan: string } | null = null;
     try {
@@ -59,7 +61,8 @@ export async function POST(req: NextRequest) {
       userRow = user;
     } catch (err) {
       const allowSkip =
-        !isProduction() || process.env.ALLOW_GENERATE_WITHOUT_DB_CHECK === "true";
+        !isProduction() ||
+        process.env.DANGEROUS_ALLOW_GENERATE_WITHOUT_DB_CHECK === "true";
       if (!allowSkip) {
         logger.error("Generate: falha ao carregar limites do utilizador", { error: err });
         return new Response(
@@ -140,6 +143,10 @@ export async function POST(req: NextRequest) {
               controller.enqueue(encoder.encode(event.delta.text));
             }
           }
+          logger.info("ai.generate.stream_complete", {
+            userId,
+            durationMs: Date.now() - startedAt,
+          });
           controller.close();
         } catch (error) {
           // Send error as in-band sentinel so the browser doesn't log NetworkError

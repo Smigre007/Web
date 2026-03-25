@@ -1,72 +1,67 @@
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import type { NextFetchEvent, NextRequest } from "next/server";
-import type { NextMiddleware } from "next/server";
 
 /**
- * Rotas acessíveis sem sessão Clerk. Tudo o resto passa por auth.protect().
- * Manter alinhado com as páginas em app/ (landing, IA, partilha pública) e rotas de sistema.
- * Se faltar uma rota pública aqui, o utilizador é redirecionado para /sign-in (comportamento errado no site público).
+ * Next.js 16+: ficheiro `proxy.ts` substitui `middleware.ts`.
+ * Rotas que não exigem sessão Clerk. Tudo o resto chama auth.protect().
+ * APIs com auth próprio (cron Bearer, webhooks) ficam aqui para não depender de cookie.
+ *
+ * Manutenção: ao adicionar `app/api/**/route.ts`, confirme se a rota deve ficar
+ * pública aqui (ex.: contact, webhooks) ou protegida por padrão (checkout, projects,
+ * ai/*, user/*, admin/*, github/connect, etc.).
  */
-const publicRoutes = [
+const isPublicRoute = createRouteMatcher([
   "/",
-  "/about",
-  "/changelog(.*)",
-  "/chat-ia(.*)",
-  "/contact",
-  "/criar(.*)",
-  "/docs(.*)",
-  "/gerar(.*)",
-  "/icon(.*)",
-  "/opengraph-image(.*)",
-  "/p/(.*)",
-  "/pricing",
-  "/privacy",
-  "/proposta(.*)",
+  "/pricing(.*)",
+  "/contact(.*)",
+  "/about(.*)",
+  "/terms(.*)",
+  "/privacy(.*)",
   "/roadmap(.*)",
-  "/robots.txt",
+  "/changelog(.*)",
+  "/proposta(.*)",
   "/showcase(.*)",
+  "/docs/operacao(.*)",
+  "/p/(.*)",
+  "/criar/(.*)",
   "/sign-in(.*)",
   "/sign-up(.*)",
-  "/sitemap.xml",
-  "/terms",
-  "/api/contact",
-  "/api/cron(.*)",
-  "/api/github/callback",
-  "/api/health",
+  "/api/health(.*)",
+  "/api/ready(.*)",
   "/api/public(.*)",
-  "/api/sitemap",
-  "/api/webhooks(.*)",
-];
+  "/api/contact(.*)",
+  "/api/webhooks/(.*)",
+  "/api/cron/(.*)",
+  "/api/sitemap(.*)",
+  "/api/github/callback(.*)",
+  "/opengraph-image(.*)",
+  "/icon(.*)",
+  "/robots.txt",
+  "/sitemap.xml",
+]);
 
-let cachedClerk: NextMiddleware | null = null;
-
-async function getClerkHandler(): Promise<NextMiddleware> {
-  if (cachedClerk) return cachedClerk;
-  const { clerkMiddleware, createRouteMatcher } = await import("@clerk/nextjs/server");
-  const isPublicRoute = createRouteMatcher(publicRoutes);
-  cachedClerk = clerkMiddleware(async (auth, req) => {
-    if (!isPublicRoute(req)) {
-      await auth.protect();
-    }
-  });
-  return cachedClerk;
-}
+const clerk = clerkMiddleware(async (auth, req) => {
+  if (!isPublicRoute(req)) {
+    await auth.protect();
+  }
+});
 
 /**
- * Smoke E2E/Lighthouse: npm run start:e2e define PLAYWRIGHT_E2E=1 — não carrega o SDK Clerk no edge.
+ * E2E/Lighthouse (`npm run start:e2e`): sem sessão Clerk no edge.
  * Não definir PLAYWRIGHT_E2E em produção.
  */
-export default async function proxy(req: NextRequest, evt: NextFetchEvent) {
+export default function proxy(req: NextRequest, evt: NextFetchEvent) {
   if (process.env.PLAYWRIGHT_E2E === "1") {
     return NextResponse.next();
   }
-  const handler = await getClerkHandler();
-  return handler(req, evt);
+  return clerk(req, evt);
 }
 
 export const config = {
   matcher: [
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    "/((?!.+\\.[\\w]+$|_next).*)",
+    "/",
     "/(api|trpc)(.*)",
   ],
 };

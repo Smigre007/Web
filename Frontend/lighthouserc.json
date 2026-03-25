@@ -1,14 +1,18 @@
 {
   "ci": {
     "collect": {
-      "url": ["http://127.0.0.1:3001/"],
+      "url": [
+        "http://127.0.0.1:3001/",
+        "http://127.0.0.1:3001/pricing",
+        "http://127.0.0.1:3001/contact"
+      ],
       "startServerCommand": "npm run start:e2e",
       "startServerReadyPattern": "Ready",
       "numberOfRuns": 1
     },
     "assert": {
       "assertions": {
-        "categories:accessibility": ["warn", { "minScore": 0.75 }]
+        "categories:accessibility": ["error", { "minScore": 0.75 }]
       }
     }
   }

@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "lighthouse:ci": "lhci autorun"
+    "lighthouse:ci": "lhci autorun",
+    "db:check": "node scripts/check-db-schema.cjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",

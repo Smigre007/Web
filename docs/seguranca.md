@@ -8,7 +8,7 @@
 
 ## Middleware (edge)
 
-A lógica de **`clerkMiddleware`** e a lista de **rotas públicas** estão em **`Frontend/proxy.ts`**. Rotas não públicas exigem sessão (`auth.protect()`).
+A lógica de **`clerkMiddleware`** e a lista de **rotas públicas** estão em **`Frontend/proxy.ts`** (Next.js 16+ — convenção `proxy` no lugar de `middleware`). Rotas não públicas exigem sessão (`auth.protect()`).
 
 Rotas públicas incluem (entre outras): home, sign-in/up, webhooks, contact, sitemap, cron, stats públicos, callback GitHub, pricing, about, contact, privacy, terms.
 

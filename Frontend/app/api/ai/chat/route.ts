@@ -31,8 +31,17 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    const startedAt = Date.now();
+
     // Rate limit: 30 chat requests per minute per user
     const rl = await checkRateLimit(`chat:${userId}`, 30, 60_000);
+    if (!rl.ok) {
+      logger.error("chat: rate limit backend unavailable", { userId });
+      return new Response(
+        JSON.stringify({ error: "Serviço temporariamente indisponível. Tente novamente em instantes." }),
+        { status: 503, headers: { "Content-Type": "application/json" } }
+      );
+    }
     if (rl.limited) {
       return new Response(
         JSON.stringify({ error: "Muitas requisições. Aguarde um momento." }),
@@ -81,6 +90,10 @@ export async function POST(req: NextRequest) {
               controller.enqueue(encoder.encode(event.delta.text));
             }
           }
+          logger.info("ai.chat.stream_complete", {
+            userId,
+            durationMs: Date.now() - startedAt,
+          });
           controller.close();
         } catch (error) {
           // Send error as in-band sentinel so the browser doesn't log NetworkError

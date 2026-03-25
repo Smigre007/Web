@@ -56,9 +56,11 @@ export function LanguageProvider({
     const stored = (typeof window !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null) as Language | null;
     const resolved: Language =
       stored && ["pt", "en", "es", "fr"].includes(stored) ? stored : initialLanguage;
-    setLanguageSate(resolved);
-    persistLangCookie(resolved);
-    loadMessages(resolved).then(setMessages);
+    queueMicrotask(() => {
+      setLanguageSate(resolved);
+      persistLangCookie(resolved);
+      loadMessages(resolved).then(setMessages);
+    });
   }, [initialLanguage]);
 
   const setLanguage = useCallback((lang: Language) => {

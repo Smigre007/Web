@@ -103,12 +103,18 @@ async function downgradeByCustomerId(customerId: string) {
 }
 
 export async function POST(req: NextRequest) {
+  if (process.env.NODE_ENV === "production" && process.env.ALLOW_UNVERIFIED_STRIPE_WEBHOOK === "true") {
+    logger.error("ALLOW_UNVERIFIED_STRIPE_WEBHOOK não é permitido em produção — ignorado");
+  }
+
   const body = await req.text();
   const sig = req.headers.get("stripe-signature");
 
   if (!process.env.STRIPE_WEBHOOK_SECRET || !process.env.STRIPE_SECRET_KEY) {
     const allowUnverified =
-      process.env.ALLOW_UNVERIFIED_STRIPE_WEBHOOK === "true" && process.env.NODE_ENV !== "production";
+      process.env.ALLOW_UNVERIFIED_STRIPE_WEBHOOK === "true" &&
+      process.env.NODE_ENV !== "production" &&
+      process.env.VERCEL_ENV !== "production";
     if (!allowUnverified) {
       logger.warn("Stripe webhook: secrets not configured — rejecting");
       return NextResponse.json({ error: "Webhook não configurado" }, { status: 503 });

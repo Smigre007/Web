@@ -38,7 +38,8 @@ A fonte de verdade para nomes e descrições no código é **`Frontend/lib/env.t
 Documentadas no [Frontend/README.md](../Frontend/README.md):
 
 - `ALLOW_UNVERIFIED_STRIPE_WEBHOOK=true` — com `NODE_ENV` ≠ `production`, aceita webhook Stripe sem verificar assinatura (testes locais).
-- `ALLOW_GENERATE_WITHOUT_DB_CHECK=true` — em produção, permite continuar geração se a leitura de limites no Supabase falhar (não recomendado).
+- `DANGEROUS_ALLOW_GENERATE_WITHOUT_DB_CHECK=true` — **emergência apenas**: em produção, permite continuar geração se a leitura de limites no Supabase falhar (não recomendado).
+
 
 ## CI
 
