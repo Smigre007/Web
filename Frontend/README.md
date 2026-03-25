@@ -26,6 +26,12 @@ npm run dev
 
 A aplicação sobe em http://localhost:3000.
 
+## TypeScript e erros no IDE
+
+- O ficheiro `next-env.d.ts` referencia **`.next/types/routes.d.ts`**, gerado pelo Next. Se ainda não correu **`npm run dev`** ou **`npm run build`**, o Cursor/VS Code pode mostrar **dezenas de erros** (ficheiro em falta). Corra um dos comandos acima e recarregue a janela do editor.
+- Verificação manual: **`npm run typecheck`** (`tsc --noEmit`), igual ao usado no CI.
+- Abra o repositório na raiz `Web` e use o **TypeScript do workspace** (definido em `.vscode/settings.json`): comando *TypeScript: Select TypeScript Version* → *Use Workspace Version*.
+
 ## Dashboard (QA)
 
 - Checklist manual e notas de auditoria: [docs/dashboard-qa-checklist.md](docs/dashboard-qa-checklist.md)

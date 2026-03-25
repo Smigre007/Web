@@ -1,4 +1,7 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  // next-env.d.ts importa .next/types/routes.d.ts — esse ficheiro só existe após
+  // `npm run dev` ou `npm run build`. Sem isso, o IDE pode mostrar erros em massa.
   "compilerOptions": {
     "target": "ES2022",
     "lib": ["ES2022", "dom", "dom.iterable"],
@@ -13,6 +16,7 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
+    "forceConsistentCasingInFileNames": true,
     "plugins": [
       {
         "name": "next"

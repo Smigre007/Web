@@ -8,6 +8,7 @@
     "start": "next start",
     "start:e2e": "cross-env PLAYWRIGHT_E2E=1 next start -H 127.0.0.1 -p 3001",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",

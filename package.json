@@ -8,6 +8,7 @@
     "build": "cd Frontend && npm run build",
     "start": "cd Frontend && npm run start",
     "lint": "cd Frontend && npm run lint",
+    "typecheck": "cd Frontend && npm run typecheck",
     "test": "cd Frontend && npm run test",
     "test:watch": "cd Frontend && npm run test:watch",
     "test:e2e": "cd Frontend && npm run test:e2e",
