@@ -140,7 +140,16 @@ export function Pricing() {
       });
       const data = await res.json();
       if (data.url) {
-        window.location.href = data.url;
+        try {
+          const parsed = new URL(data.url);
+          if (parsed.protocol === "https:" || parsed.protocol === "http:") {
+            window.location.href = data.url;
+          } else {
+            toast.error(data.error ?? "Erro ao iniciar checkout");
+          }
+        } catch {
+          toast.error(data.error ?? "Erro ao iniciar checkout");
+        }
       } else {
         toast.error(data.error ?? "Erro ao iniciar checkout");
       }
