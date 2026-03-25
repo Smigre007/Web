@@ -7,7 +7,7 @@ import type { NextFetchEvent, NextRequest } from "next/server";
  * Rotas que não exigem sessão Clerk. Tudo o resto chama auth.protect().
  * APIs com auth próprio (cron Bearer, webhooks) ficam aqui para não depender de cookie.
  *
- * Manutenção: ao adicionar `app/api/**/route.ts`, confirme se a rota deve ficar
+ * Manutenção: ao adicionar novos `route.ts` em `app/api/` (subpastas), confirme se a rota deve ficar
  * pública aqui (ex.: contact, webhooks) ou protegida por padrão (checkout, projects,
  * ai/*, user/*, admin/*, github/connect, etc.).
  */
